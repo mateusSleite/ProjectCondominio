@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 export default function TelaInicial() {
     return (
-        <View style={{ width: '100%', height: '35.5em', backgroundColor: '#e0e0e0' }}>
+        <View style={{ width: '100%', height: '85%', backgroundColor: '#e0e0e0' }}>
             <View style={styles.container}>
                 <View style={{ alignItems: 'center' }}>
                     <Image style={styles.logo} source={require('./img/logo.png')} />
