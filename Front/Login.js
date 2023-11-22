@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginTop: '1em'
     },
-
+            
     otherView: {
         width: '100%',
         height: '55%',
