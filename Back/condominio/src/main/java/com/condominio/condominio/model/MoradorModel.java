@@ -1,9 +1,11 @@
-package main.java.com.condominio.condominio.model;
+package com.condominio.condominio.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @AllArgsConstructor
@@ -28,6 +30,10 @@ public class MoradorModel {
 
     @Getter
     @Setter
+    private String senha;
+
+    @Getter
+    @Setter
     private Boolean adm;
 
     public MoradorModel() { }
@@ -36,11 +42,19 @@ public class MoradorModel {
         this.id = id;
     }
 
-    public MoradorModel(String name, String bloco, String apto, Boolean adm) {
+    public MoradorModel(String name, String bloco, String apto, String senha, Boolean adm) {
         this.name = name;
         this.bloco = bloco;
         this.apto = apto;
+        this.senha = senha;
         this.adm = adm;
+    }
+
+    public MoradorModel(String name, String bloco, String apto, String senha) {
+        this.name = name;
+        this.bloco = bloco;
+        this.apto = apto;
+        this.senha = senha;
     }
 
     public MoradorModel(String name, String bloco, String apto) {

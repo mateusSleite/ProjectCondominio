@@ -1,44 +1,94 @@
+import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity } from 'react-native';
+import axios from 'axios';
 
 export default function Login(props) {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [block, setBlock] = useState('');
+    const [apartment, setApartment] = useState('');
+
+    const handleRegister = () => {
+        const apiEndpoint = 'http://localhost:8080/morador';
+
+        const userData = {
+            name: username,
+            senha: password,
+            bloco: block,
+            apto: apartment,
+        };
+
+        axios.post(apiEndpoint, userData)
+            .then(response => {
+                console.log('Usuário cadastrado com sucesso:', response.data);
+            })
+            .catch(error => {
+                console.error('Erro ao cadastrar usuário:', error);
+            });
+
+        props.navigation.navigate('TelaInicial')
+    };
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#e0e0e0' }}>
             <View style={styles.logo}>
-                <Image style={styles.logoimg} source={require('./img/logo.png')} />
+                <Image style={styles.logoimg} source={require('./src/assets/img/logo.png')} />
             </View>
 
             <View style={styles.otherView}>
                 <View style={styles.login}>
                     <View style={{ alignItems: 'center' }}>
-                        <Image style={styles.logoimgrosa} source={require('./img/logorosa.png')} />
+                        <Image style={styles.logoimgrosa} source={require('./src/assets/img/logorosa.png')} />
+
                         <View style={styles.entrada}>
-                            <Image style={styles.user} source={require('./img/login.png')} />
-                            <TextInput style={styles.input} placeholder="Digite o Usuário" />
+                            <Image style={styles.user} source={require('./src/assets/img/login.png')} />
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Digite o Usuário"
+                                value={username}
+                                onChangeText={text => setUsername(text)}
+                            />
                         </View>
+
                         <View style={styles.entrada2}>
-                            <Image style={styles.senha} source={require('./img/senha.png')} />
-                            <TextInput style={styles.input} placeholder="Digite a Senha" />
+                            <Image style={styles.senha} source={require('./src/assets/img/senha.png')} />
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Digite a Senha"
+                                value={password}
+                                onChangeText={text => setPassword(text)}
+                                secureTextEntry={true}
+                            />
                         </View>
+
                         <View style={styles.entrada2}>
                             <Image style={styles.bloco} source={require('./src/assets/img/apto.png')} />
-                            <TextInput style={styles.input} placeholder="Digite o Bloco" />
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Digite o Bloco"
+                                value={block}
+                                onChangeText={text => setBlock(text)}
+                            />
                         </View>
+
                         <View style={styles.entrada2}>
                             <Image style={styles.apto} source={require('./src/assets/img/aptochave.png')} />
-                            <TextInput style={styles.input} placeholder="Digite o Apartamento" />
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Digite o Apartamento"
+                                value={apartment}
+                                onChangeText={text => setApartment(text)}
+                            />
                         </View>
-                        <View>
-                            <TouchableOpacity style={styles.botao}>
-                                <Text style={{ color: '#ffffff' }}>Cadastrar</Text>
-                            </TouchableOpacity>
-                        </View>
+
+                        <TouchableOpacity style={styles.botao} onPress={handleRegister}>
+                            <Text style={{ color: '#ffffff' }}>Cadastrar</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
         </View>
     );
-
 }
 
 const styles = StyleSheet.create({
@@ -62,7 +112,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginTop: '1em'
     },
-            
+
     otherView: {
         width: '100%',
         height: '55%',
@@ -79,7 +129,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: '1em',
         borderBottomRightRadius: '1em',
         borderBottomLeftRadius: '1em'
-
     },
 
     entrada: {
@@ -99,7 +148,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: '1.5em'
     },
-
 
     user: {
         width: '1em',
@@ -123,7 +171,7 @@ const styles = StyleSheet.create({
         marginLeft: '0.9em',
         marginTop: '0.55em'
     },
-    
+
     bloco: {
         width: '1.3em',
         height: '1.1em',
@@ -147,5 +195,4 @@ const styles = StyleSheet.create({
         borderRadius: '1em',
         marginTop: '2em'
     }
-
 });

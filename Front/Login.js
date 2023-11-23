@@ -1,41 +1,73 @@
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Alert } from 'react-native';
+import axios from 'axios';
 
 export default function Login(props) {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    function goToLogin()
-    {
-        props.navigation.navigate('TelaInicial')
-    }
+    const handleLogin = async () => {
+        const apiEndpoint = 'http://localhost:8080/morador/authenticate';
+
+        const userData = {
+            name: username,
+            senha: password,
+        };
+
+        try {
+            const response = await axios.post(apiEndpoint, userData);
+
+            if (response.data.authenticated) {
+                props.navigation.navigate('TelaInicial');
+            } else {
+                Alert.alert('Falha na autenticação', 'Usuário ou senha inválidos.');
+            }
+        } catch (error) {
+            console.error('Erro durante o login:', error);
+            Alert.alert('Erro', 'Ocorreu um erro durante o login. Por favor, tente novamente.');
+        }
+    };
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#e0e0e0' }}>
             <View style={styles.logo}>
-                <Image style={styles.logoimg} source={require('./img/logo.png')} />
+                <Image style={styles.logoimg} source={require('./src/assets/img/logo.png')} />
             </View>
 
             <View style={styles.otherView}>
                 <View style={styles.login}>
                     <View style={{ alignItems: 'center' }}>
-                        <Image style={styles.logoimgrosa} source={require('./img/logorosa.png')} />
+                        <Image style={styles.logoimgrosa} source={require('./src/assets/img/logorosa.png')} />
+                        
                         <View style={styles.entrada}>
-                            <Image style={styles.user} source={require('./img/login.png')} />
-                            <TextInput style={styles.input} placeholder="Digite seu Usuário" />
+                            <Image style={styles.user} source={require('./src/assets/img/login.png')} />
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Digite seu Usuário"
+                                value={username}
+                                onChangeText={text => setUsername(text)}
+                            />
                         </View>
+                        
                         <View style={styles.entrada2}>
-                            <Image style={styles.senha} source={require('./img/senha.png')} />
-                            <TextInput style={styles.input} placeholder="Digite sua Senha" />
+                            <Image style={styles.senha} source={require('./src/assets/img/senha.png')} />
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Digite sua Senha"
+                                value={password}
+                                onChangeText={text => setPassword(text)}
+                                secureTextEntry={true}
+                            />
                         </View>
-                        <View>
-                            <TouchableOpacity onPress={() => goToLogin()} style={styles.botao}>
-                                <Text style={{ color: '#ffffff' }}>Logar</Text>
-                            </TouchableOpacity>
-                        </View>
+                        
+                        <TouchableOpacity style={styles.botao} onPress={handleLogin}>
+                            <Text style={{ color: '#ffffff' }}>Logar</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
         </View>
     );
-
 }
 
 const styles = StyleSheet.create({
@@ -76,7 +108,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: '1em',
         borderBottomRightRadius: '1em',
         borderBottomLeftRadius: '1em'
-
     },
 
     entrada: {
@@ -96,7 +127,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: '1.5em'
     },
-
 
     user: {
         width: '1em',
@@ -130,5 +160,4 @@ const styles = StyleSheet.create({
         borderRadius: '1em',
         marginTop: '5.5em'
     }
-
 });

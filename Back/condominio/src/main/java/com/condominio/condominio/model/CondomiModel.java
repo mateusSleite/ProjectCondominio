@@ -1,13 +1,15 @@
-package main.java.com.condominio.condominio.model;
+package com.condominio.condominio.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @AllArgsConstructor
-@Document("morador")
+@Document("condominio")
 public class CondomiModel {
     @Id
     @Getter

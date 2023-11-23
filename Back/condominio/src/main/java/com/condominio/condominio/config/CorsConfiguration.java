@@ -1,4 +1,4 @@
-package main.java.com.condominio.condominio.config;
+package com.condominio.condominio.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

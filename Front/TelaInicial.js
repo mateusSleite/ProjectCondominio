@@ -15,7 +15,7 @@ export default function TelaInicial(props) {
             <View>
                 <View style={styles.container}>
                     <View style={{ alignItems: 'center' }}>
-                        <Image style={styles.logo} source={require('./img/logo.png')} />
+                        <Image style={styles.logo} source={require('./src/assets/img/logo.png')} />
                     </View>
                     <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                         <View style={{ flexDirection: "row" }}>
@@ -29,7 +29,7 @@ export default function TelaInicial(props) {
 
                         </View>
                         <View style={{ alignItems: "center" }}>
-                            <Image style={styles.config} source={require('./img/config.png')} />
+                            <Image style={styles.config} source={require('./src/assets/img/config.png')} />
                         </View>
                     </View>
                 </View>
@@ -39,7 +39,7 @@ export default function TelaInicial(props) {
                 <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}>
                     <TouchableOpacity>
                         <View style={styles.blocorec}>
-                            <Image style={{ width: '17%', height: '50%', marginLeft: '1em', marginTop: '1.1em' }} source={require('./img/boleto.png')} />
+                            <Image style={{ width: '17%', height: '50%', marginLeft: '1em', marginTop: '1.1em' }} source={require('./src/assets/img/boleto.png')} />
                             <View>
                                 <Text style={{ marginTop: '1.5em', marginLeft: '1.0em', fontWeight: 'bold', fontSize: '0.7em' }}>Boleto</Text>
                                 <Text style={{ marginLeft: '1.2em', fontSize: '0.6em' }}>Pague seu Condomínio</Text>
@@ -49,7 +49,7 @@ export default function TelaInicial(props) {
                     </TouchableOpacity>
                     <TouchableOpacity>
                         <View style={styles.blocorec}>
-                            <Image style={{ width: '23%', height: '45%', marginLeft: '1em', marginTop: '1.4em' }} source={require('./img/reuniao.png')} />
+                            <Image style={{ width: '23%', height: '45%', marginLeft: '1em', marginTop: '1.4em' }} source={require('./src/assets/img/reuniao.png')} />
                             <View>
                                 <Text style={{ marginTop: '1.5em', marginLeft: '1.0em', fontWeight: 'bold', fontSize: '0.7em' }}>Assembleia</Text>
                                 <Text style={{ marginLeft: '1.2em', fontSize: '0.6em' }}>Pague seu Condomínio</Text>
@@ -64,19 +64,19 @@ export default function TelaInicial(props) {
                 <View style={{ flexDirection: "row", justifyContent: 'space-evenly', marginBottom: '1em' }}>
                     <TouchableOpacity onPress={() => goToApt()}>
                         <View style={styles.blocosec}>
-                            <Image style={{ width: '2.5em', height: '2.7em', marginTop: '1.8em' }} source={require('./img/casa.png')} />
+                            <Image style={{ width: '2.5em', height: '2.7em', marginTop: '1.8em' }} source={require('./src/assets/img/casa.png')} />
                             <Text style={{ fontSize: '0.75em', marginTop: '1.2em' }}>APARTAMENTO</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity>
                         <View style={styles.blocosec}>
-                            <Image style={{ width: '1.5em', height: '2.6em', marginTop: '1.9em' }} source={require('./img/custo.png')} />
+                            <Image style={{ width: '1.5em', height: '2.6em', marginTop: '1.9em' }} source={require('./src/assets/img/custo.png')} />
                             <Text style={{ fontSize: '0.75em', marginTop: '1.2em' }}>CUSTO</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity>
                         <View style={styles.blocosec}>
-                            <Image style={{ width: '2.6em', height: '2.9em', marginTop: '2em' }} source={require('./img/churrasqueira.png')} />
+                            <Image style={{ width: '2.6em', height: '2.9em', marginTop: '2em' }} source={require('./src/assets/img/churrasqueira.png')} />
                             <Text style={{ fontSize: '0.75em', marginTop: '0.7em' }}>CHURRASQUEIRA</Text>
                         </View>
                     </TouchableOpacity>
@@ -84,19 +84,19 @@ export default function TelaInicial(props) {
                 <View style={{ flexDirection: "row", justifyContent: 'space-evenly', marginBottom: '1em' }}>
                     <TouchableOpacity>
                         <View style={styles.blocosec}>
-                            <Image style={{ width: '2.0em', height: '2.8em', marginTop: '1.9em' }} source={require('./img/lixo.png')} />
+                            <Image style={{ width: '2.0em', height: '2.8em', marginTop: '1.9em' }} source={require('./src/assets/img/lixo.png')} />
                             <Text style={{ fontSize: '0.75em', marginTop: '1em' }}>LIXO</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity>
                         <View style={styles.blocosec}>
-                            <Image style={{ width: '2.6em', height: '2.6em', marginTop: '2.1em' }} source={require('./img/erro.png')} />
+                            <Image style={{ width: '2.6em', height: '2.6em', marginTop: '2.1em' }} source={require('./src/assets/img/erro.png')} />
                             <Text style={{ fontSize: '0.75em', marginTop: '1em' }}>RECLAMAÇÕES</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity>
                         <View style={styles.blocosec}>
-                            <Image style={{ width: '2.6em', height: '2.8em', marginTop: '1.9em' }} source={require('./img/eleicao.png')} />
+                            <Image style={{ width: '2.6em', height: '2.8em', marginTop: '1.9em' }} source={require('./src/assets/img/eleicao.png')} />
                             <Text style={{ fontSize: '0.75em', marginTop: '0.9em' }}>ELEIÇÕES</Text>
                         </View>
                     </TouchableOpacity>

@@ -17,7 +17,7 @@ export default function Bloco() {
         <View style={{ backgroundColor: '#e0e0e0', height: '100%' }}>
             <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#e0e0e0' }}>
                 <View style={styles.logo}>
-                    <Image style={styles.logoimg} source={require('./img/logo.png')} />
+                    <Image style={styles.logoimg} source={require('./src/assets/img/logo.png')} />
                 </View>
                 <Text style={{ marginTop: '2em', fontSize: '1em', marginBottom: '2.2em' }}>Apartamento</Text>
                 <View style={{ alignItems: 'center' }}>
@@ -25,7 +25,7 @@ export default function Bloco() {
                         {blocos.map((blocoNumero, index) => (
                             <TouchableOpacity key={blocoNumero} onPress={() => goToModal(blocoNumero)}>
                                 <View style={styles.blocosec}>
-                                    <Image style={{ width: '3em', height: '3.1em', marginTop: '1.8em' }} source={require('./img/casa.png')} />
+                                    <Image style={{ width: '3em', height: '3.1em', marginTop: '1.8em' }} source={require('./src/assets/img/casa.png')} />
                                     <Text style={{ fontSize: '0.8em', marginTop: '1.2em' }}>BLOCO {blocoNumero}</Text>
                                 </View>
                             </TouchableOpacity>
