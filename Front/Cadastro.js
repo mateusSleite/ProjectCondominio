@@ -2,11 +2,6 @@ import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity } from 'reac
 
 export default function Login(props) {
 
-    function goToLogin()
-    {
-        props.navigation.navigate('TelaInicial')
-    }
-
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#e0e0e0' }}>
             <View style={styles.logo}>
@@ -19,15 +14,23 @@ export default function Login(props) {
                         <Image style={styles.logoimgrosa} source={require('./img/logorosa.png')} />
                         <View style={styles.entrada}>
                             <Image style={styles.user} source={require('./img/login.png')} />
-                            <TextInput style={styles.input} placeholder="Digite seu Usuário" />
+                            <TextInput style={styles.input} placeholder="Digite o Usuário" />
                         </View>
                         <View style={styles.entrada2}>
                             <Image style={styles.senha} source={require('./img/senha.png')} />
-                            <TextInput style={styles.input} placeholder="Digite sua Senha" />
+                            <TextInput style={styles.input} placeholder="Digite a Senha" />
+                        </View>
+                        <View style={styles.entrada2}>
+                            <Image style={styles.bloco} source={require('./src/assets/img/apto.png')} />
+                            <TextInput style={styles.input} placeholder="Digite o Bloco" />
+                        </View>
+                        <View style={styles.entrada2}>
+                            <Image style={styles.apto} source={require('./src/assets/img/aptochave.png')} />
+                            <TextInput style={styles.input} placeholder="Digite o Apartamento" />
                         </View>
                         <View>
-                            <TouchableOpacity onPress={() => goToLogin()} style={styles.botao}>
-                                <Text style={{ color: '#ffffff' }}>Logar</Text>
+                            <TouchableOpacity style={styles.botao}>
+                                <Text style={{ color: '#ffffff' }}>Cadastrar</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
 
     login: {
         width: '80%',
-        height: '22em',
+        height: '25em',
         backgroundColor: '#ffffff',
         bottom: '9em',
         borderTopLeftRadius: '1em',
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#e0e0e0',
         borderRadius: '1em',
         flexDirection: 'row',
-        marginTop: '3.5em'
+        marginTop: '2em'
     },
 
     entrada2: {
@@ -120,6 +123,20 @@ const styles = StyleSheet.create({
         marginLeft: '0.9em',
         marginTop: '0.55em'
     },
+    
+    bloco: {
+        width: '1.3em',
+        height: '1.1em',
+        marginLeft: '0.7em',
+        marginTop: '0.55em'
+    },
+
+    apto: {
+        width: '1.3em',
+        height: '1.3em',
+        marginLeft: '0.7em',
+        marginTop: '0.55em'
+    },
 
     botao: {
         width: '6em',
@@ -128,7 +145,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: '1em',
-        marginTop: '5.5em'
+        marginTop: '2em'
     }
 
 });

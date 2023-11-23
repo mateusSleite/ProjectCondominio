@@ -1,14 +1,15 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity, Modal } from "react-native";
-import { useContext, useState } from 'react';
-import ModalApartamento from './ModalApartamento'
+import { useState } from 'react';
+import ModalApartamento from './ModalApartamento';
 
 export default function Bloco() {
-
     const [modalVisible, setModalVisible] = useState(false);
-    const [bloco, setbloco] = useState();
+    const [bloco, setBloco] = useState();
 
-    function goToModal(blocoalterado) {
-        setbloco(blocoalterado)
+    const blocos = [1, 2, 3, 4, 5]; // Lista de números dos blocos
+
+    function goToModal(blocoAlterado) {
+        setBloco(blocoAlterado);
         setModalVisible(!modalVisible);
     }
 
@@ -20,50 +21,22 @@ export default function Bloco() {
                 </View>
                 <Text style={{ marginTop: '2em', fontSize: '1em', marginBottom: '2.2em' }}>Apartamento</Text>
                 <View style={{ alignItems: 'center' }}>
-                    <View style={{ flexDirection: "row", justifyContent: 'space-evenly', marginBottom: '1em' }}>
-                        <TouchableOpacity onPress={() => goToModal(1)}>
-                            <View style={styles.blocosec}>
-                                <Image style={{ width: '3em', height: '3.1em', marginTop: '1.8em' }} source={require('./img/casa.png')} />
-                                <Text style={{ fontSize: '0.8em', marginTop: '1.2em' }}>BLOCO 1</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => goToModal(2)}>
-                            <View style={styles.blocosec}>
-                                <Image style={{ width: '3em', height: '3.1em', marginTop: '1.8em' }} source={require('./img/casa.png')} />
-                                <Text style={{ fontSize: '0.8em', marginTop: '1.2em' }}>BLOCO 2</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flexDirection: "row", marginBottom: '1em' }}>
-                        <TouchableOpacity onPress={() => goToModal(3)}>
-                            <View style={styles.blocosec}>
-                                <Image style={{ width: '3em', height: '3.1em', marginTop: '1.8em' }} source={require('./img/casa.png')} />
-                                <Text style={{ fontSize: '0.8em', marginTop: '1.2em' }}>BLOCO 3</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => goToModal(4)}>
-                            <View style={styles.blocosec}>
-                                <Image style={{ width: '3em', height: '3.1em', marginTop: '1.8em' }} source={require('./img/casa.png')} />
-                                <Text style={{ fontSize: '0.8em', marginTop: '1.2em' }}>BLOCO 4</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flexDirection: "row", justifyContent: 'space-evenly', marginBottom: '1em' }}>
-                        <TouchableOpacity onPress={() => goToModal(5)}>
-                            <View style={styles.blocosec}>
-                                <Image style={{ width: '3em', height: '3.1em', marginTop: '1.8em' }} source={require('./img/casa.png')} />
-                                <Text style={{ fontSize: '0.8em', marginTop: '1.2em' }}>BLOCO 5</Text>
-                            </View>
-                        </TouchableOpacity>
+                    <View style={{ flexDirection: "row", justifyContent: 'space-evenly', flexWrap: 'wrap', marginBottom: '1em' }}>
+                        {blocos.map((blocoNumero, index) => (
+                            <TouchableOpacity key={blocoNumero} onPress={() => goToModal(blocoNumero)}>
+                                <View style={styles.blocosec}>
+                                    <Image style={{ width: '3em', height: '3.1em', marginTop: '1.8em' }} source={require('./img/casa.png')} />
+                                    <Text style={{ fontSize: '0.8em', marginTop: '1.2em' }}>BLOCO {blocoNumero}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        ))}
                     </View>
                     <ModalApartamento visible={modalVisible} onClose={goToModal} bloco={bloco} />
                 </View>
             </View>
-
         </View>
     );
 }
-
 
 const styles = StyleSheet.create({
     logo: {
@@ -87,7 +60,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffffff",
         borderRadius: '8px',
         alignItems: 'center',
-        marginLeft: '0.5em',
-        marginRight: '0.5em'
-    }
-})      
+        marginBottom: '2em'
+    }   
+});      
