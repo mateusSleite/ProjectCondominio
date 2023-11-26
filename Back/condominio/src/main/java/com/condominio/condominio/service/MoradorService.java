@@ -27,13 +27,14 @@ public class MoradorService {
         return this.moradorRepository.findAll();
     }
 
+    public boolean authenticateUser(String name, String senha) {
+        MoradorModel morador = this.moradorRepository.findByNomeAndSenha(name, senha);
+        return morador != null;
+    }
+
     public void delete(String id) {
         this.moradorRepository.deleteById(id);
     }
 
-    public boolean authenticate(String nome, String senha) {
-        MoradorModel morador = moradorRepository.findByNomeAndSenha(nome, senha);
-        return morador != null;
-    }
 
 }

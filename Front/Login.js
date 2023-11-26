@@ -3,28 +3,24 @@ import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Alert } fro
 import axios from 'axios';
 
 export default function Login(props) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [name, setname] = useState('');
+    const [senha, setsenha] = useState('');
 
     const handleLogin = async () => {
-        const apiEndpoint = 'http://localhost:8080/morador/authenticate';
-
-        const userData = {
-            name: username,
-            senha: password,
-        };
-
         try {
-            const response = await axios.post(apiEndpoint, userData);
+            const response = await axios.post('http://localhost:8080/morador/login', {
+                name: name,
+                senha: senha,
+            });
 
-            if (response.data.authenticated) {
+            if (response.status === 200) {
                 props.navigation.navigate('TelaInicial');
             } else {
-                Alert.alert('Falha na autenticação', 'Usuário ou senha inválidos.');
+                Alert.alert('Erro', 'Credenciais inválidas');
             }
         } catch (error) {
-            console.error('Erro durante o login:', error);
-            Alert.alert('Erro', 'Ocorreu um erro durante o login. Por favor, tente novamente.');
+            console.error('Erro ao autenticar:', error);
+            Alert.alert('Erro', 'Algo deu errado ao autenticar. Tente novamente mais tarde.');
         }
     };
 
@@ -44,8 +40,8 @@ export default function Login(props) {
                             <TextInput
                                 style={styles.input}
                                 placeholder="Digite seu Usuário"
-                                value={username}
-                                onChangeText={text => setUsername(text)}
+                                value={name}
+                                onChangeText={text => setname(text)}
                             />
                         </View>
                         
@@ -54,8 +50,8 @@ export default function Login(props) {
                             <TextInput
                                 style={styles.input}
                                 placeholder="Digite sua Senha"
-                                value={password}
-                                onChangeText={text => setPassword(text)}
+                                value={senha}
+                                onChangeText={text => setsenha(text)}
                                 secureTextEntry={true}
                             />
                         </View>

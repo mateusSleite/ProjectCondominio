@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.Map;
+
 
 import com.condominio.condominio.service.MoradorService;
 import com.condominio.condominio.model.MoradorModel;
@@ -30,21 +32,27 @@ public class MoradorController {
     }
 
     @PostMapping("")
-    public void newMorador(@RequestBody MoradorModel newMorador) { 
+    public void newMorador(@RequestBody MoradorModel newMorador) {
         moradorService.save(newMorador);
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<String> authenticateMorador(@RequestBody MoradorModel moradorModel) {
-        String nome = moradorModel.getName();
-        String senha = moradorModel.getSenha();
+    @PostMapping("/login")
+        public ResponseEntity<String> authenticateUser(@RequestBody Map<String, String> credentials) {
+        String username = credentials.get("name");
+        String password = credentials.get("senha");
 
-        if (moradorService.authenticate(nome, senha)) {
-            return ResponseEntity.ok("Autenticação bem-sucedida");
+        System.out.println("Úsuario: " + username);
+        System.out.println("Senha: " + password);
+
+        boolean isAuthenticated = moradorService.authenticateUser(username, password);
+
+        if (isAuthenticated) {
+            return ResponseEntity.ok("Login bem-sucedido");
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Falha na autenticação");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
         }
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteMorador(@PathVariable String id) {
