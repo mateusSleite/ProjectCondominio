@@ -41,9 +41,6 @@ public class MoradorController {
         String username = credentials.get("name");
         String password = credentials.get("senha");
 
-        System.out.println("Úsuario: " + username);
-        System.out.println("Senha: " + password);
-
         boolean isAuthenticated = moradorService.authenticateUser(username, password);
 
         if (isAuthenticated) {

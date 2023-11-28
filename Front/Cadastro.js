@@ -8,17 +8,17 @@ export default function Login(props) {
     const [block, setBlock] = useState('');
     const [apartment, setApartment] = useState('');
 
-    const handleRegister = () => {
+    const handleRegister = async ()  => {
         const apiEndpoint = 'http://localhost:8080/morador';
 
         const userData = {
             name: username,
             senha: password,
             bloco: block,
-            apto: apartment,
+            apto: apartment
         };
 
-        axios.post(apiEndpoint, userData)
+        await axios.post(apiEndpoint, userData)
             .then(response => {
                 console.log('Usuário cadastrado com sucesso:', response.data);
             })
@@ -26,7 +26,16 @@ export default function Login(props) {
                 console.error('Erro ao cadastrar usuário:', error);
             });
 
-        props.navigation.navigate('TelaInicial')
+        const response = await axios.post('http://localhost:8080/condo/admModi', {
+            bloco: block,
+            apto: apartment
+        });
+
+        if (response.status === 200) {
+            props.navigation.navigate('TelaInicial');
+        } else {
+            Alert.alert('Erro', 'Credenciais inválidas');
+        }
     };
 
     return (
