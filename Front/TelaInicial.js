@@ -1,17 +1,26 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 export default function TelaInicial(props) {
 
+    var session = JSON.parse(sessionStorage.getItem("morador"));
+
     function goToApt() {
         props.navigation.navigate('Bloco')
+        console.log(session.adm);
     }
 
     function goToCadastro() {
         props.navigation.navigate('Cadastro')
     }
 
+    function goToLogin() {
+        sessionStorage.clear();
+        props.navigation.navigate('Login')
+    }
+
+
     return (
-        <View style={{ flex: 1, justifyContent: 'space-between', backgroundColor: '#e0e0e0' }}>
+        <View style={{ flex: 1, justifyContent: 'space-between', backgroundColor: '#e0e0    e0' }}>
             <View>
                 <View style={styles.container}>
                     <View style={{ alignItems: 'center' }}>
@@ -23,17 +32,19 @@ export default function TelaInicial(props) {
 
                             </View>
                             <View>
-                                <Text style={{ marginTop: '2.5em', marginLeft: '1em', color: "white", fontSize: '0.9em' }}>Olá, Raimundo</Text>
+                                <Text style={{ marginTop: '2.5em', marginLeft: '1em', color: "white", fontSize: '0.9em' }}>Olá, {session.name}</Text>
                                 <Text style={{ marginTop: '0.1em', marginLeft: '1em', color: "white", fontSize: '0.9em' }}>Condomínio das Águas</Text>
                             </View>
 
                         </View>
                         <View style={{ alignItems: "center" }}>
-                            <Image style={styles.config} source={require('./src/assets/img/config.png')} />
+                            <TouchableOpacity onPress={() => goToLogin()}>
+                                <Image style={styles.config} source={require('./src/assets/img/sair.png')} />
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-                <View style={{ backgroundColor: '#e0e0e0' }}>
+                <View style={{}}>
                     <Text style={{ color: 'black', marginLeft: '1em', marginBottom: '0.8em', marginTop: '0.5em', fontSize: '0.8em' }}>PRINCIPAIS SERVIÇOS </Text>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}>
@@ -58,7 +69,7 @@ export default function TelaInicial(props) {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View style={{ backgroundColor: '#e0e0e0' }}>
+                <View style={{}}>
                     <Text style={{ color: 'black', marginLeft: '1em', marginBottom: '0.8em', marginTop: '0.5em', fontSize: '0.8em' }}>OUTROS SERVIÇOS </Text>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: 'space-evenly', marginBottom: '1em' }}>
@@ -101,25 +112,29 @@ export default function TelaInicial(props) {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: "row", justifyContent: 'space-evenly', marginBottom: '1em' }}>
-                    <TouchableOpacity>
-                        <View style={styles.blocosec}>
-                            <Image style={{ width: '2.3em', height: '3.0em', marginTop: '1.9em' }} source={require('./src/assets/img/func.png')} />
-                            <Text style={{ fontSize: '0.75em', marginTop: '0.7em' }}>FUNCIONÁRIO</Text>
+                <View>
+                    {session.adm == true &&
+                        <View style={{ flexDirection: "row", justifyContent: 'space-evenly', marginBottom: '1em' }}>
+                            <TouchableOpacity>
+                                <View style={styles.blocosec}>
+                                    <Image style={{ width: '2.3em', height: '3.0em', marginTop: '1.9em' }} source={require('./src/assets/img/func.png')} />
+                                    <Text style={{ fontSize: '0.75em', marginTop: '0.7em' }}>FUNCIONÁRIO</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                                <View style={styles.blocosec}>
+                                    <Image style={{ width: '3.6em', height: '2.5em', marginTop: '2.1em' }} source={require('./src/assets/img/camera.png')} />
+                                    <Text style={{ fontSize: '0.75em', marginTop: '1em' }}>CÂMERAS</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => goToCadastro()}>
+                                <View style={styles.blocosec}>
+                                    <Image style={{ width: '2.7em', height: '2.8em', marginTop: '1.9em' }} source={require('./src/assets/img/add.png')} />
+                                    <Text style={{ fontSize: '0.75em', marginTop: '0.9em' }}>CADASTRAR</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <View style={styles.blocosec}>
-                            <Image style={{ width: '3.6em', height: '2.5em', marginTop: '2.1em' }} source={require('./src/assets/img/camera.png')} />
-                            <Text style={{ fontSize: '0.75em', marginTop: '1em' }}>CÂMERAS</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => goToCadastro()}>
-                        <View style={styles.blocosec}>
-                            <Image style={{ width: '2.7em', height: '2.8em', marginTop: '1.9em' }} source={require('./src/assets/img/add.png')} />
-                            <Text style={{ fontSize: '0.75em', marginTop: '0.9em' }}>CADASTRAR</Text>
-                        </View>
-                    </TouchableOpacity>
+                    }
                 </View>
             </View>
         </View>
@@ -151,8 +166,8 @@ const styles = StyleSheet.create({
     },
 
     config: {
-        width: '0.5em',
-        height: '2em',
+        width: '2em',
+        height: '2.5em',
         marginTop: '2.5em',
         marginRight: '1em'
     },

@@ -1,8 +1,8 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
-import { useState, useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 import ModalApartamento from './ModalApartamento';
 
-export default function Bloco() {
+export default function Bloco(props) {
     const [modalVisible, setModalVisible] = useState(false);
     const [bloco, setBloco] = useState();
     const [blocoInfo, setBlocoInfo] = useState(null);
@@ -30,12 +30,18 @@ export default function Bloco() {
         setModalVisible(!modalVisible);
     }
 
+    function goToTela() {
+        props.navigation.navigate('TelaInicial');
+    }
+
     return (
         <View style={{ backgroundColor: '#e0e0e0', height: '100%' }}>
             <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#e0e0e0' }}>
-                <View style={styles.logo}>
-                    <Image style={styles.logoimg} source={require('./src/assets/img/logo.png')} />
-                </View>
+                <TouchableOpacity onPress={() => goToTela()}>
+                    <View style={styles.logo}>
+                        <Image style={styles.logoimg} source={require('./src/assets/img/logo.png')} />
+                    </View>
+                </TouchableOpacity>
                 <Text style={{ marginTop: '2em', fontSize: '1em', marginBottom: '2.2em' }}>Apartamento</Text>
                 <View style={{ alignItems: 'center' }}>
                     <View style={{ flexDirection: "row", justifyContent: 'space-evenly', flexWrap: 'wrap', marginBottom: '1em' }}>
@@ -48,7 +54,7 @@ export default function Bloco() {
                             </TouchableOpacity>
                         ))}
                     </View>
-                    <ModalApartamento visible={modalVisible} onClose={goToModal} bloco={bloco} blocoInfo={blocoInfo}/>
+                    <ModalApartamento visible={modalVisible} onClose={goToModal} bloco={bloco} blocoInfo={blocoInfo} />
                 </View>
             </View>
         </View>
@@ -78,5 +84,5 @@ const styles = StyleSheet.create({
         borderRadius: '8px',
         alignItems: 'center',
         marginBottom: '2em'
-    }   
+    }
 });      

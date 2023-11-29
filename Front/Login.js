@@ -8,12 +8,31 @@ export default function Login(props) {
 
     const handleLogin = async () => {
         try {
+            const response1 = await axios.get("http://localhost:8080/morador");
+
+            var data = response1.data;
+            var teste;
+
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].name === name && data[i].senha === senha) {
+                    teste = data[i];
+                    break;
+                }
+            }
+
+            const morador = {
+                name: name,
+                senha: senha,
+                adm: teste.adm
+            };
+
             const response = await axios.post('http://localhost:8080/morador/login', {
                 name: name,
                 senha: senha,
             });
 
             if (response.status === 200) {
+                sessionStorage.setItem("morador", JSON.stringify(morador));
                 props.navigation.navigate('TelaInicial');
             } else {
                 Alert.alert('Erro', 'Credenciais inválidas');
@@ -23,6 +42,15 @@ export default function Login(props) {
             Alert.alert('Erro', 'Algo deu errado ao autenticar. Tente novamente mais tarde.');
         }
     };
+
+    if (sessionStorage.length > 0) {
+        try {
+            props.navigation.navigate('TelaInicial');
+        }
+        catch (e) {
+
+        }
+    }
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#e0e0e0' }}>
@@ -34,7 +62,7 @@ export default function Login(props) {
                 <View style={styles.login}>
                     <View style={{ alignItems: 'center' }}>
                         <Image style={styles.logoimgrosa} source={require('./src/assets/img/logorosa.png')} />
-                        
+
                         <View style={styles.entrada}>
                             <Image style={styles.user} source={require('./src/assets/img/login.png')} />
                             <TextInput
@@ -44,7 +72,7 @@ export default function Login(props) {
                                 onChangeText={text => setname(text)}
                             />
                         </View>
-                        
+
                         <View style={styles.entrada2}>
                             <Image style={styles.senha} source={require('./src/assets/img/senha.png')} />
                             <TextInput
@@ -55,7 +83,7 @@ export default function Login(props) {
                                 secureTextEntry={true}
                             />
                         </View>
-                        
+
                         <TouchableOpacity style={styles.botao} onPress={handleLogin}>
                             <Text style={{ color: '#ffffff' }}>Logar</Text>
                         </TouchableOpacity>
@@ -87,7 +115,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginTop: '1em'
     },
-            
+
     otherView: {
         width: '100%',
         height: '55%',

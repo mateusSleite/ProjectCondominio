@@ -38,11 +38,17 @@ export default function Login(props) {
         }
     };
 
+    function goToTela() {
+        props.navigation.navigate('TelaInicial');
+    }
+
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#e0e0e0' }}>
-            <View style={styles.logo}>
-                <Image style={styles.logoimg} source={require('./src/assets/img/logo.png')} />
-            </View>
+            <TouchableOpacity onPress={() => goToTela()}>
+                <View style={styles.logo}>
+                    <Image style={styles.logoimg} source={require('./src/assets/img/logo.png')} />
+                </View>
+            </TouchableOpacity>
 
             <View style={styles.otherView}>
                 <View style={styles.login}>
