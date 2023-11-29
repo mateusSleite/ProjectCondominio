@@ -1,6 +1,5 @@
 import { Modal, View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-
-export default function ModalUsuario({ visible, onClose, bloco }) {
+export default function ModalUsuario({ visible, onClose, bloco, blocoInfo }) {
     return (
         <Modal
             animationType="slide"
@@ -10,41 +9,45 @@ export default function ModalUsuario({ visible, onClose, bloco }) {
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <View style={{alignItems: 'center'}}>
-                        <Text style={{ fontWeight: 'bold', marginBottom: '4em' }}>Bloco {String(bloco)} </Text>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ fontWeight: 'bold', marginBottom: '4em' }}>Bloco {String(bloco)}</Text>
                     </View>
-                    <View style={styles.rowContainer}>
-                        <View style={styles.columnContainer}>
-                            <Text>Quantidade de Apto</Text>
+                    {blocoInfo && (
+                        <>
                             <View style={styles.rowContainer}>
-                                <Image style={styles.logoimgrosa} source={require('./src/assets/img/apto.png')} />
-                                <Text>16</Text>
+                                <View style={styles.columnContainer}>
+                                    <Text>Quantidade de Apto</Text>
+                                    <View style={styles.rowContainer}>
+                                        <Image style={styles.logoimgrosa} source={require('./src/assets/img/apto.png')} />
+                                        <Text>{blocoInfo.quantidadeTotal}</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.columnContainer}>
+                                    <Text>Apto Disponíveis</Text>
+                                    <View style={styles.rowContainer}>
+                                        <Image style={styles.logoimgrosa} source={require('./src/assets/img/apto.png')} />
+                                        <Text>{blocoInfo.quantidadeDisponivel}</Text>
+                                    </View>
+                                </View>
                             </View>
-                        </View>
-                        <View style={styles.columnContainer}>
-                            <Text>Apto Disponíveis</Text>
                             <View style={styles.rowContainer}>
-                                <Image style={styles.logoimgrosa} source={require('./src/assets/img/apto.png')} />
-                                <Text>12</Text>
+                                <View style={styles.columnContainer}>
+                                    <Text>Vagas por Apto</Text>
+                                    <View style={styles.rowContainer}>
+                                        <Image style={styles.logoimgrosa} source={require('./src/assets/img/apto.png')} />
+                                        <Text>{2}</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.columnContainer}>
+                                    <Text>Apto por Andar</Text>
+                                    <View style={styles.rowContainer}>
+                                        <Image style={styles.logoimgrosa} source={require('./src/assets/img/apto.png')} />
+                                        <Text>{4}</Text>
+                                    </View>
+                                </View>
                             </View>
-                        </View>
-                    </View>
-                    <View style={styles.rowContainer}>
-                        <View style={styles.columnContainer}>
-                            <Text>Vagas por Apto</Text>
-                            <View style={styles.rowContainer}>
-                                <Image style={styles.logoimgrosa} source={require('./src/assets/img/apto.png')} />
-                                <Text>16</Text>
-                            </View>
-                        </View>
-                        <View style={styles.columnContainer}>
-                            <Text>Apto por Andar</Text>
-                            <View style={styles.rowContainer}>
-                                <Image style={styles.logoimgrosa} source={require('./src/assets/img/apto.png')} />
-                                <Text >4</Text>
-                            </View>
-                        </View>
-                    </View>
+                        </>
+                    )}
                     <View style={styles.centeredContainer}>
                         <TouchableOpacity onPress={onClose} style={styles.closeButton}>
                             <Text style={{ color: '#ffffff' }}>Fechar</Text>
@@ -53,7 +56,7 @@ export default function ModalUsuario({ visible, onClose, bloco }) {
                 </View>
             </View>
         </Modal>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 import com.condominio.condominio.service.CondomiService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.condominio.condominio.model.CondomiModel;
 
 @RestController
@@ -36,6 +37,7 @@ public class CondomiController {
         long quantidadeDisponivel = condomiService.getQuantidadeAptosDisponiveisPorBloco(bloco);
 
         DadosBlocoResponse response = new DadosBlocoResponse(quantidadeTotal, quantidadeDisponivel);
+        System.out.println(response);
         return ResponseEntity.ok(response);
     }
 
@@ -67,10 +69,13 @@ public class CondomiController {
     }
 
     private static class DadosBlocoResponse {
+         @JsonProperty("quantidadeTotal")
         private final long quantidadeTotal;
+        @JsonProperty("quantidadeDisponivel")
         private final long quantidadeDisponivel;
 
         public DadosBlocoResponse(long quantidadeTotal, long quantidadeDisponivel) {
+            
             this.quantidadeTotal = quantidadeTotal;
             this.quantidadeDisponivel = quantidadeDisponivel;
         }

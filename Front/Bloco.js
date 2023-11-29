@@ -1,12 +1,29 @@
-import { StyleSheet, View, Image, Text, TouchableOpacity, Modal } from "react-native";
-import { useState } from 'react';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import { useState, useEffect  } from 'react';
 import ModalApartamento from './ModalApartamento';
 
 export default function Bloco() {
     const [modalVisible, setModalVisible] = useState(false);
     const [bloco, setBloco] = useState();
+    const [blocoInfo, setBlocoInfo] = useState(null);
 
-    const blocos = [1, 2, 3, 4, 5]; // Lista de números dos blocos
+    const blocos = [1, 2, 3, 4, 5];
+
+    const fetchBlocoInfo = async (blocoNumero) => {
+        try {
+            const response = await fetch(`http://localhost:8080/condo/dadosBloco/${blocoNumero}`);
+            const data = await response.json();
+            setBlocoInfo(data);
+        } catch (error) {
+            console.error('Erro ao buscar informações do bloco:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (bloco !== undefined) {
+            fetchBlocoInfo(bloco);
+        }
+    }, [bloco]);
 
     function goToModal(blocoAlterado) {
         setBloco(blocoAlterado);
@@ -31,7 +48,7 @@ export default function Bloco() {
                             </TouchableOpacity>
                         ))}
                     </View>
-                    <ModalApartamento visible={modalVisible} onClose={goToModal} bloco={bloco} />
+                    <ModalApartamento visible={modalVisible} onClose={goToModal} bloco={bloco} blocoInfo={blocoInfo}/>
                 </View>
             </View>
         </View>
