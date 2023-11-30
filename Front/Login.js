@@ -19,11 +19,13 @@ export default function Login(props) {
                     break;
                 }
             }
-
+            
             const morador = {
                 name: name,
                 senha: senha,
-                adm: teste.adm
+                adm: teste.adm,
+                bloco: teste.bloco,
+                apto: teste.apto
             };
 
             const response = await axios.post('http://localhost:8080/morador/login', {

@@ -37,9 +37,23 @@ public class CondomiController {
         long quantidadeDisponivel = condomiService.getQuantidadeAptosDisponiveisPorBloco(bloco);
 
         DadosBlocoResponse response = new DadosBlocoResponse(quantidadeTotal, quantidadeDisponivel);
-        System.out.println(response);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/preco/{bloco}/{apto}")
+    public ResponseEntity<String> getPrecoApto(@PathVariable String bloco, @PathVariable String apto) {
+    try {
+        String preco = condomiService.getPrecoApto(bloco, apto);
+        if (preco != null) {
+            return ResponseEntity.ok(preco);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao buscar o preço: " + e.getMessage());
+    }
+}
+
 
     @PostMapping("/new")
     public void newCondo(@RequestBody CondomiModel newCondo) {
@@ -51,9 +65,6 @@ public class CondomiController {
         String bloco = credentials.get("bloco");
         String apto = credentials.get("apto");
 
-        System.out.println(bloco);
-        System.out.println(apto);
-
         boolean isStatusChanged = condomiService.mudarAtivo(bloco, apto);
 
         if (isStatusChanged) {
@@ -61,6 +72,14 @@ public class CondomiController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
         }
+    }
+
+    @PostMapping("/new/batch")
+    public ResponseEntity<String> createMultipleCondos(@RequestBody List<CondomiModel> newCondos) {
+        for (CondomiModel condo : newCondos) {
+            condomiService.save(condo);
+        }
+        return ResponseEntity.ok("Apartamentos criados com sucesso");
     }
 
     @DeleteMapping("/{id}")

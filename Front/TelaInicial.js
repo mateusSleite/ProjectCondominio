@@ -18,6 +18,11 @@ export default function TelaInicial(props) {
         props.navigation.navigate('Login')
     }
 
+    function goToPrice() {
+        props.navigation.navigate('Preco')
+    }
+
+
 
     return (
         <View style={{ flex: 1, justifyContent: 'space-between', backgroundColor: '#e0e0    e0' }}>
@@ -79,7 +84,7 @@ export default function TelaInicial(props) {
                             <Text style={{ fontSize: '0.75em', marginTop: '1.2em' }}>APARTAMENTO</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => goToPrice()}>
                         <View style={styles.blocosec}>
                             <Image style={{ width: '1.5em', height: '2.6em', marginTop: '1.9em' }} source={require('./src/assets/img/custo.png')} />
                             <Text style={{ fontSize: '0.75em', marginTop: '1.2em' }}>CUSTO</Text>

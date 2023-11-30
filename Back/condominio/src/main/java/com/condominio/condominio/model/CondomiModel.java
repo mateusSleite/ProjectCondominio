@@ -26,7 +26,11 @@ public class CondomiModel {
 
     @Getter
     @Setter
-    private Boolean ativo ;
+    private Boolean ativo;
+
+    @Getter
+    @Setter
+    private String price;
 
     public CondomiModel() { }
 
@@ -34,9 +38,10 @@ public class CondomiModel {
         this.id = id;
     }
 
-    public CondomiModel(String bloco, String apto, Boolean ativo) {
+    public CondomiModel(String bloco, String apto, Boolean ativo, String price) {
         this.bloco = bloco;
         this.apto = apto;
         this.ativo = ativo;
+        this.price = price;
     }
 }

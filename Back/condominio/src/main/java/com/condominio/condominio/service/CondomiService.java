@@ -35,6 +35,15 @@ public class CondomiService {
         }
     }
 
+    public String getPrecoApto(String bloco, String apto) {
+        CondomiModel condomi = condomiRepository.findByBlocoAndApto(bloco, apto);
+        if (condomi != null) {
+            return condomi.getPrice();
+        } else {
+            return null;
+        }
+    }
+
     public List<CondomiModel> findAll() {
         return this.condomiRepository.findAll();
     }
