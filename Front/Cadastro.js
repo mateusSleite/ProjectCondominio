@@ -8,34 +8,38 @@ export default function Login(props) {
     const [block, setBlock] = useState('');
     const [apartment, setApartment] = useState('');
 
-    const handleRegister = async ()  => {
-        const apiEndpoint = 'http://localhost:8080/morador';
+    const handleRegister = async () => {
 
-        const userData = {
-            name: username,
-            senha: password,
-            bloco: block,
-            apto: apartment
-        };
+        if (block < 6 && apartment < 9) {
+            const apiEndpoint = 'http://localhost:8080/morador';
 
-        await axios.post(apiEndpoint, userData)
-            .then(response => {
-                console.log('Usuário cadastrado com sucesso:', response.data);
-            })
-            .catch(error => {
-                console.error('Erro ao cadastrar usuário:', error);
+            const userData = {
+                name: username,
+                senha: password,
+                bloco: block,
+                apto: apartment
+            };
+
+            await axios.post(apiEndpoint, userData)
+                .then(response => {
+                    console.log('Usuário cadastrado com sucesso:', response.data);
+                })
+                .catch(error => {
+                    console.error('Erro ao cadastrar usuário:', error);
+                });
+
+            const response = await axios.post('http://localhost:8080/condo/admModi', {
+                bloco: block,
+                apto: apartment
             });
 
-        const response = await axios.post('http://localhost:8080/condo/admModi', {
-            bloco: block,
-            apto: apartment
-        });
-
-        if (response.status === 200) {
-            props.navigation.navigate('TelaInicial');
-        } else {
-            Alert.alert('Erro', 'Credenciais inválidas');
+            if (response.status === 200) {
+                props.navigation.navigate('TelaInicial');
+            } else {
+                Alert.alert('Erro', 'Credenciais inválidas');
+            }
         }
+
     };
 
     function goToTela() {
